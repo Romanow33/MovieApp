@@ -19,7 +19,7 @@ export function App() {
       <main>
         <Switch>
           <Route exact path="/movies/:movieId">
-            <MovieDetails/>
+            <MovieDetails />
           </Route>
           
           <Route path="/"><LandingPage/></Route>
