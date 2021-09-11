@@ -1,2 +1,2 @@
 # MovieApp
- React ap to Apis Moie
+ React app to Apis Moie
