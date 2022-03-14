@@ -13,6 +13,7 @@ export function MoviesGrid({ search }) {
 
   return (
     <InfiniteScroll
+      className={styles.scroll}
       dataLength={movies.length}
       hasMore={hasNextPage | isLoading}
       next={() => fetchNextPage()}
