@@ -1,39 +1,33 @@
-import styles from './search.module.css'
-import {FaSearch} from 'react-icons/fa'
-import { useHistory } from 'react-router';
-import { useEffect, useState } from 'react';
-import { useQuery } from '../hooks/query';
+import styles from "./search.module.css";
+import { FaSearch } from "react-icons/fa";
+import { useSearchParams } from "react-router-dom";
 
 export function Search() {
-    const [searchText, setSearchText] = useState("");
-    const history = useHistory();
-    const query = useQuery()
-    const search = query.get('search')
+  const [query, setQuery] = useSearchParams();
+  const search = query.get("search");
 
-    useEffect(() => {
-        setSearchText(search || "")
-    }, [search]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+  return (
+    <form className={styles.searchContainer} onSubmit={handleSubmit}>
+      <div className={styles.searchBox}>
+        <input
+          className={styles.searchInput}
+          type="text"
+          value={search ?? ""}
+          autoFocus
+          placeholder="Title"
+          aria-label="Search Movies"
+          onChange={(e) => {
+            const value = e.target.value;
 
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        history.push("/?search=" + searchText)
-    }
-
-    return (
-        <form className={styles.searchContainer} onSubmit={handleSubmit}>
-            <div className={styles.searchBox} >
-                <input type="text" 
-                className={styles.searchInput} 
-                value={searchText} 
-                onChange={(e) => setSearchText(e.target.value)}/>
-
-                <button type="submit" className={styles.searchButton}>
-
-                    <FaSearch size={20}/>
-
-                </button>
-            </div>
-        </form>
-    )
+            setQuery({ search: value });
+            // navigate("/?search=" + value);
+          }}
+        />
+        <FaSearch size={20} color="black" className={styles.searchButton} />
+      </div>
+    </form>
+  );
 }
